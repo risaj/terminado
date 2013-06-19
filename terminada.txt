@@ -1,0 +1,181 @@
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;
+charset=utf-8">
+<meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+
+    var pictureSource; // Origen de la imagen
+    var destinationType; // Fo
+
+function onBodyLoad() {
+document.addEventListener("deviceready",onDeviceReady,
+false);
+}
+function onDeviceReady() {
+
+
+pictureSource=navigator.camera.PictureSourceType;
+destinationType=navigator.camera.DestinationType;
+//playAudio("file:///Sounds/love_rain.mp3")
+
+}
+
+        
+        var my_media = null;
+        var mediaTimer = null;
+
+        function playAudio(src) {
+            if (my_media == null) {
+                // Crea un objeto `Media` desde el argumento
+                my_media = new Media(src, onSuccess, onError);
+            }
+            my_media.play();
+
+            // Actualiza la posición cada segundo
+            if (mediaTimer == null) {
+                mediaTimer = setInterval(function() {
+                    // Obtiene la posición actual
+                    my_media.getCurrentPosition(
+                        // Función 'callback' satisfactoria
+                        function(position) {
+                            if (position > -1) {
+                                setAudioPosition((position) + " seg");
+                            }
+                        },
+                        // Función 'callback' de error
+                        function(e) {
+                            console.log("Error obteniendo posición=" + e);
+                            setAudioPosition("Error: " + e);
+                        }
+                    );
+                }, 1000);
+            }
+        }
+
+        // Pausa la reproducción
+        //
+        function pauseAudio() {
+            if (my_media) {
+                my_media.pause();
+            }
+        }
+
+        // Detiene la reproducción
+        //
+        
+            clearInterval(mediaTimer);{
+            mediaTimer = null;
+        }
+
+        // Función 'callback' onSuccess
+        //
+        function onSuccess() {
+            console.log("playAudio():Audio Correcto");
+        }
+
+        // Función 'callback' onError
+        //
+        function onError(error) {
+            alert('código: ' + error.code + '\n' +
+                  'mensaje: ' + error.message + '\n');
+        }
+
+        // Muestra la posición
+        //
+        function setAudioPosition(position) {
+            document.getElementById('audio_position').innerHTML = position;
+        }
+
+
+
+ 
+  function onPhotoDataSuccess(imageData) {
+      // Descomenta esta linea para ver la imagen codificada en base64
+      console.log(imageData);
+
+      // Obtiene el elemento HTML de la imagen
+      //
+      var smallImage = document.getElementById('smallImage');
+
+      // Revela el elemento de la imagen
+      //
+      smallImage.style.display = 'block';
+
+      // Muestra la foto capturada
+      // Se usan reglas CSS para dimensionar la imagen
+      //
+      smallImage.src = "data:image/jpeg;base64," + imageData;
+    }
+
+    // Llamada cuando la foto se retorna sin problemas
+    //
+    function onPhotoURISuccess(imageURI) {
+      // Descomenta esta linea para ver la ruta URI al fichero de imagen
+      console.log(imageURI);
+
+      // Obtiene el elemento HTML de la imagen
+      //
+      var largeImage = document.getElementById('largeImage');
+
+      // Revela el elemento de la imagen
+      //
+      largeImage.style.display = 'block';
+
+      // Muestra la foto capturada
+      // Se usan reglas CSS para dimensionar la imagen
+      //
+      largeImage.src = imageURI;
+    }
+
+    // Un botón llamara a esta función
+    //
+    function capturePhoto() {
+      // Toma la imagen y la retorna como una string codificada en base64
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
+    }
+
+    // Un botón llamara a esta función
+    //
+    function capturePhotoEdit() {
+      // Toma la imagen, permite editarla y la retorna como una string codificada en base64
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true });
+    }
+
+    // Un botón llamara a esta función
+    //
+    function getPhoto(source) {
+      // Retorna la ruta del fichero de imagen desde el origen especificado
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+    }
+
+    // Llamado cuando algo malo ocurre
+    //
+    function onFail(message) {
+      alert('Ocurrió un error: ' + message);
+    }
+
+
+
+
+
+</script>
+
+</head>
+<body onload="onBodyLoad()">
+</p><button onclick= playAudio('file:///Sounds/love_rain.mp3');>Play</button></p>
+<p><button onclick= "pauseAudio();">Pausa</button></p>
+<p id="audio_position"></p>
+        
+
+<button onclick="capturePhoto();">Capturar foto</button> <br>
+<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Desde la librería de imágenes</button><br>
+<button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">Desde el álbum de fotos</button><br>
+
+
+</body>
+</html>
