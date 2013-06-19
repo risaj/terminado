@@ -34,20 +34,20 @@ destinationType=navigator.camera.DestinationType;
             }
             my_media.play();
 
-            // Actualiza la posición cada segundo
+            // Actualiza la posiciï¿½n cada segundo
             if (mediaTimer == null) {
                 mediaTimer = setInterval(function() {
-                    // Obtiene la posición actual
+                    // Obtiene la posiciï¿½n actual
                     my_media.getCurrentPosition(
-                        // Función 'callback' satisfactoria
+                        // Funciï¿½n 'callback' satisfactoria
                         function(position) {
                             if (position > -1) {
                                 setAudioPosition((position) + " seg");
                             }
                         },
-                        // Función 'callback' de error
+                        // Funciï¿½n 'callback' de error
                         function(e) {
-                            console.log("Error obteniendo posición=" + e);
+                            console.log("Error obteniendo posiciï¿½n=" + e);
                             setAudioPosition("Error: " + e);
                         }
                     );
@@ -55,7 +55,7 @@ destinationType=navigator.camera.DestinationType;
             }
         }
 
-        // Pausa la reproducción
+        // Pausa la reproducciï¿½n
         //
         function pauseAudio() {
             if (my_media) {
@@ -63,27 +63,27 @@ destinationType=navigator.camera.DestinationType;
             }
         }
 
-        // Detiene la reproducción
+        // Detiene la reproducciï¿½n
         //
         
             clearInterval(mediaTimer);{
             mediaTimer = null;
         }
 
-        // Función 'callback' onSuccess
+        // Funciï¿½n 'callback' onSuccess
         //
         function onSuccess() {
             console.log("playAudio():Audio Correcto");
         }
 
-        // Función 'callback' onError
+        // Funciï¿½n 'callback' onError
         //
         function onError(error) {
-            alert('código: ' + error.code + '\n' +
+            alert('cï¿½digo: ' + error.code + '\n' +
                   'mensaje: ' + error.message + '\n');
         }
 
-        // Muestra la posición
+        // Muestra la posiciï¿½n
         //
         function setAudioPosition(position) {
             document.getElementById('audio_position').innerHTML = position;
@@ -130,21 +130,21 @@ destinationType=navigator.camera.DestinationType;
       largeImage.src = imageURI;
     }
 
-    // Un botón llamara a esta función
+    // Un botï¿½n llamara a esta funciï¿½n
     //
     function capturePhoto() {
       // Toma la imagen y la retorna como una string codificada en base64
       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
     }
 
-    // Un botón llamara a esta función
+    // Un botï¿½n llamara a esta funciï¿½n
     //
     function capturePhotoEdit() {
       // Toma la imagen, permite editarla y la retorna como una string codificada en base64
       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true });
     }
 
-    // Un botón llamara a esta función
+    // Un botï¿½n llamara a esta funciï¿½n
     //
     function getPhoto(source) {
       // Retorna la ruta del fichero de imagen desde el origen especificado
@@ -156,7 +156,7 @@ destinationType=navigator.camera.DestinationType;
     // Llamado cuando algo malo ocurre
     //
     function onFail(message) {
-      alert('Ocurrió un error: ' + message);
+      alert('Ocurriï¿½ un error: ' + message);
     }
 
 
@@ -167,14 +167,14 @@ destinationType=navigator.camera.DestinationType;
 
 </head>
 <body onload="onBodyLoad()">
-</p><button onclick= playAudio('file:///Sounds/love_rain.mp3');>Play</button></p>
+</p><button onclick= playAudio('file:///Sounds/fumando_vamos_a_casa.mp3');>Play</button></p>
 <p><button onclick= "pauseAudio();">Pausa</button></p>
 <p id="audio_position"></p>
         
 
 <button onclick="capturePhoto();">Capturar foto</button> <br>
-<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Desde la librería de imágenes</button><br>
-<button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">Desde el álbum de fotos</button><br>
+<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Desde la librerï¿½a de imï¿½genes</button><br>
+<button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">Desde el ï¿½lbum de fotos</button><br>
 
 
 </body>
