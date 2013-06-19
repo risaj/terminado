@@ -34,20 +34,20 @@ destinationType=navigator.camera.DestinationType;
             }
             my_media.play();
 
-            // Actualiza la posici�n cada segundo
+            // Actualiza la posicion cada segundo
             if (mediaTimer == null) {
                 mediaTimer = setInterval(function() {
                     // Obtiene la posici�n actual
                     my_media.getCurrentPosition(
-                        // Funci�n 'callback' satisfactoria
+                        // Funcion 'callback' satisfactoria
                         function(position) {
                             if (position > -1) {
                                 setAudioPosition((position) + " seg");
                             }
                         },
-                        // Funci�n 'callback' de error
+                        // Funcion 'callback' de error
                         function(e) {
-                            console.log("Error obteniendo posici�n=" + e);
+                            console.log("Error obteniendo posicion=" + e);
                             setAudioPosition("Error: " + e);
                         }
                     );
@@ -55,7 +55,7 @@ destinationType=navigator.camera.DestinationType;
             }
         }
 
-        // Pausa la reproducci�n
+        // Pausa la reproduccion
         //
         function pauseAudio() {
             if (my_media) {
@@ -63,27 +63,27 @@ destinationType=navigator.camera.DestinationType;
             }
         }
 
-        // Detiene la reproducci�n
+        // Detiene la reproduccion
         //
         
             clearInterval(mediaTimer);{
             mediaTimer = null;
         }
 
-        // Funci�n 'callback' onSuccess
+        // Funcion 'callback' onSuccess
         //
         function onSuccess() {
             console.log("playAudio():Audio Correcto");
         }
 
-        // Funci�n 'callback' onError
+        // Funcion 'callback' onError
         //
         function onError(error) {
-            alert('c�digo: ' + error.code + '\n' +
+            alert('codigo: ' + error.code + '\n' +
                   'mensaje: ' + error.message + '\n');
         }
 
-        // Muestra la posici�n
+        // Muestra la posicion
         //
         function setAudioPosition(position) {
             document.getElementById('audio_position').innerHTML = position;
@@ -130,21 +130,21 @@ destinationType=navigator.camera.DestinationType;
       largeImage.src = imageURI;
     }
 
-    // Un bot�n llamara a esta funci�n
+    // Un boton llamara a esta funcion
     //
     function capturePhoto() {
       // Toma la imagen y la retorna como una string codificada en base64
       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50 });
     }
 
-    // Un bot�n llamara a esta funci�n
+    // Un boton llamara a esta funcion
     //
     function capturePhotoEdit() {
       // Toma la imagen, permite editarla y la retorna como una string codificada en base64
       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true });
     }
 
-    // Un bot�n llamara a esta funci�n
+    // Un boton llamara a esta funcion
     //
     function getPhoto(source) {
       // Retorna la ruta del fichero de imagen desde el origen especificado
@@ -156,7 +156,7 @@ destinationType=navigator.camera.DestinationType;
     // Llamado cuando algo malo ocurre
     //
     function onFail(message) {
-      alert('Ocurri� un error: ' + message);
+      alert('Ocurrio un error: ' + message);
     }
 
 
@@ -173,8 +173,8 @@ destinationType=navigator.camera.DestinationType;
         
 
 <button onclick="capturePhoto();">Capturar foto</button> <br>
-<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Desde la librer�a de im�genes</button><br>
-<button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">Desde el �lbum de fotos</button><br>
+<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Desde la libreria de imagenes</button><br>
+<button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">Desde el album de fotos</button><br>
 
 
 </body>
